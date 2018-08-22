@@ -1,6 +1,6 @@
 <?php
 
-namespace DistributedRandom;
+namespace HandyBiteSize\DistributedRandom;
 
 /**
  * Class GenerateRandom
