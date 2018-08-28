@@ -56,8 +56,10 @@ use HandyBiteSize\DistributedRandom\GenerateRandom;
 
 //examples here
 
-
+//Initialise GenerateRandom with an int seed for replicable  generators
 $randomise = new GenerateRandom();
+// or for example  $randomise = new GenerateRandom(1234567890);
+
 
 //random double between 0 and 1 distributed around 0.5
 $rand = $randomise->random();
