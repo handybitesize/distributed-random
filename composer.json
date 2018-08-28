@@ -1,6 +1,8 @@
 {
     "name": "handybitesize/distributed-random",
     "description": "Generate random numbers from a range with a normal distribution. Allows skewing and rounding.",
+    "keywords": ["random","seed", "normal distribution", "distribution", "skew"],
+    "homepage": "https://github.com/handybitesize/distributed-random",
     "type": "library",
     "license": "MIT",
     "authors": [
