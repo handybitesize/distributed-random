@@ -8,6 +8,16 @@ namespace HandyBiteSize\DistributedRandom;
  */
 class GenerateRandom
 {
+    public $seed;
+
+    public function __construct($seed = null)
+    {
+        if (!$seed || !is_long($seed))  {
+            $seed = mt_rand();
+        }
+        $this->seed = $seed;
+        mt_srand($this->seed);
+    }
     /**
      * @param int $size
      * @param int $min
@@ -18,7 +28,7 @@ class GenerateRandom
      */
     public function randomArray($size = 100, $min = 0, $max = 1, $weightedMean = null, $roundToNearest = 0)
     {
-        $out = [];
+        $out = array();
         for($i = 0; $i < $size; $i++) {
             $out[] = $this->random($min, $max, $weightedMean, $roundToNearest);
         }
@@ -34,11 +44,6 @@ class GenerateRandom
      */
     public function random($min = 0, $max = 1, $weightedMean = null, $roundToNearest = 0)
     {
-        $debug = [
-            'min' => $min,
-            'max' => $max,
-            'range' => $max - $min
-        ];
         $range = $max - $min;
         if (!$weightedMean) {
             $weightedMean = $range / 2;
@@ -53,18 +58,14 @@ class GenerateRandom
         $boxMuller = sqrt(-2 * log($r1)) * cos(2 * M_PI * $r2);
         $rand = $boxMuller * sqrt($variance) + $mean;
 
-        $debug['rand'] = $rand;
-
         if ($rand < 0 || $rand > 5) {
             return $this->random($min, $max, $weightedMean, $roundToNearest);
         }
         $out = (($rand / 5) * $range) + $min;
 
-        $debug['shift'] = $out;
         if ($roundToNearest) {
             $out = $this->roundToNearest($out, $roundToNearest);
         }
-        $debug['out'] = $out;
         return $out;
     }
 
